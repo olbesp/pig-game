@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  border: 1px solid red;
+}
+
+html { font-size: 20px; }
+
+.display {
+  position: relative;
+  display: flex;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.playerPanel-1,
+.playerPanel-2 {
+  position: relative;
+  width: 50%;
+  height: 100vh;
+  text-align: center;
+}
+
+.playerName {
+  margin-top: 20px;
+}
+
+.sum {
+  margin-top: 60px;
+  font-size: 150%;
+}
+
+.boxScore {
+  position: absolute;
+  left: 15%;
+  bottom: 2%;
+  width: 70%;
+  /*height: 60px;*/
+}
+
+.currentLabel {
+  margin-top: 5px;
+  font-size: 70%;
+}
+
+.currentScore {
+  margin: 10px auto;
+  font-size: 120%;
+}
+
+.btn {
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 30px;
+  z-index: 10;
+  text-transform: uppercase;
+  font-size: 50%;
+}
+
+#newGame { top: 60px; }
+#rollDice { top: 240px; }
+#hold { top: 275px; }
+
+#diceImg {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  /*display: inline-block;*/
+}
