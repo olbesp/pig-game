@@ -67,6 +67,19 @@ html { font-size: 20px; }
   z-index: 10;
   text-transform: uppercase;
   font-size: 50%;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: font-size .3s;
+}
+
+.btn:hover { font-size: 60%; }
+.btn:focus { outline: none; }
+
+.btn i {
+  margin-right: 8px;
+  font-size: 140%;
+  color: #006eb0;
 }
 
 #newGame { top: 60px; }
