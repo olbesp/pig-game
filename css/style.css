@@ -3,7 +3,6 @@
   padding: 0;
   box-sizing: border-box;
   text-transform: uppercase;
-  border: 1px solid red;
 }
 
 html { font-size: 20px; }
@@ -13,6 +12,8 @@ html { font-size: 20px; }
   display: flex;
   width: 95%;
   margin: 0 auto;
+  box-shadow: 2px 0 20px #909090, -2px 0 20px #909090;
+  color: #232323;
 }
 
 .playerPanel-1,
@@ -23,13 +24,18 @@ html { font-size: 20px; }
   text-align: center;
 }
 
+.active {
+  background: #ededed;
+}
+
 .playerName {
   margin-top: 20px;
 }
 
 .sum {
   margin-top: 60px;
-  font-size: 150%;
+  font-size: 190%;
+  color: #006eb0;
 }
 
 .boxScore {
@@ -37,17 +43,18 @@ html { font-size: 20px; }
   left: 15%;
   bottom: 2%;
   width: 70%;
-  /*height: 60px;*/
+  background: #006eb0;
 }
 
 .currentLabel {
   margin-top: 5px;
-  font-size: 70%;
+  font-size: 50%;
 }
 
 .currentScore {
   margin: 10px auto;
   font-size: 120%;
+  color: #fff;
 }
 
 .btn {
@@ -72,5 +79,6 @@ html { font-size: 20px; }
   left: 50%;
   transform: translateX(-50%);
   width: 80px;
-  /*display: inline-block;*/
+  filter: hue-rotate(210deg);
+  box-shadow: 2px 2px 20px #909090, -2px -2px 20px #909090;
 }
