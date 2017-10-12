@@ -34,7 +34,7 @@ html {
 
 .active {
   position: relative;
-  background: #ededed;
+  background: #f2f2f2;
 }
 
 .active .playerName::after {
@@ -59,11 +59,11 @@ html {
 .boxScore {
   position: absolute;
   left: 50%;
-  bottom: 5%;
+  bottom: 20%;
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
-  width: 80px;
+  width: 60px;
   background: #e92a40;
 }
 
@@ -86,7 +86,7 @@ html {
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
   z-index: 10;
-  width: 100px;
+  width: 80px;
   height: 30px;
   font-family: 'Cabin Sketch', cursive;
   text-transform: uppercase;
@@ -99,31 +99,55 @@ html {
   transition: all .3s;
 }
 
-.btn:hover { font-size: 60%; }
+.btn:hover {
+  font-size: 55%;
+  background: rgba(221, 221, 221, 0.3);
+}
 .btn:active { background: #ddd; }
 .btn:focus { outline: none; }
 
 .btn i {
   margin-right: 8px;
   vertical-align: middle;
-  font-size: 140%;
+  font-size: 130%;
   color: #e92a40;
 }
 
 #newGame { top: 60px; }
-#rollDice { top: 210px; }
-#hold { top: 250px; }
+#rollDice { top: 205px; }
+#hold { top: 235px; }
 
-#diceImg {
+.dice {
   position: absolute;
-  top: 100px;
   left: 50%;
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
-  width: 80px;
-  -webkit-box-shadow: 2px 2px 20px #909090, -2px -2px 20px #909090;
-          box-shadow: 2px 2px 20px #909090, -2px -2px 20px #909090;
+  width: 50px;
+  -webkit-box-shadow: 1px 1px 20px #ccc, -1px -1px 20px #ccc;
+          box-shadow: 1px 1px 20px #ccc, -1px -1px 20px #ccc;
+}
+
+#diceImg-1 { top: 90px; }
+#diceImg-2 { top: 150px; }
+
+input {
+  position: absolute;
+  top: 280px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 30px;
+  font-size: 40%;
+  font-family: 'Cabin Sketch', cursive;
+  text-align: center;
+  border: 2px solid rgba(221, 221, 221, 0.3);
+  transition: all .3s;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid #ddd;
 }
 
 /*===================================================================*/
@@ -142,12 +166,12 @@ html {
   }
 
   .btn {
-    width: 130px;
+    width: 113px;
     font-size: 70%;
   }
 
   .btn:hover { font-size: 80%; }
-  #diceImg { width: 100px; }
+  input { font-size: 52%; }
 }
 
 /*===================================================================*/
@@ -220,13 +244,21 @@ html {
   .boxScore { width: 150px; }
 
   .btn {
-    width: 200px;
-    height: 45px;
+    width: 140px;
+    height: 35px;
   }
 
+  .dice { width: 70px; }
+  #diceImg-1 { top: 100px; }
+  #diceImg-2 { top: 180px; }
   #rollDice { top: 260px; }
-  #hold { top: 300px; }
-  #diceImg { top: 150px; }
+  #hold { top: 295px; }
+
+  input {
+    top: 335px;
+    width: 150px;
+    font-size: 55%;
+  }
 }
 
 /*===================================================================*/
@@ -237,8 +269,8 @@ html {
 
   .display {
     width: 70%;
-    height: 70vh;
-    margin: 15vh auto;
+    height: 80vh;
+    margin: 10vh auto;
   }
 
   .playerPanel-1,
@@ -247,4 +279,15 @@ html {
   }
 
   .active .playerName::after { top: 32px; right: 25%; }
+  .boxScore { bottom: 15%; }
+  .dice { width: 90px; }
+  #diceImg-2 {top: 200px;}
+  #rollDice { top: 300px; }
+  #hold { top: 335px; }
+
+  input {
+    top: 375px;
+    width: 150px;
+    font-size: 55%;
+  }
 }
