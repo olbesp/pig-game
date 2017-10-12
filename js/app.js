@@ -24,7 +24,7 @@ var name2 = document.querySelector("#name-2");
 var newGameBtn = document.querySelector("#newGame");
 var rollDiceBtn = document.querySelector("#rollDice");
 var holdBtn = document.querySelector("#hold");
-
+var userInput = document.querySelector("input");
 var activePlayer;
 var finalScore = 100;
 
@@ -44,6 +44,24 @@ function reset() {
   // Makes buttons enabled
   rollDiceBtn.disabled = false;
   holdBtn.disabled = false;
+}
+
+// Controls if at least one of dice == 1
+function controlScore() {
+  // If both of dice != 1
+  if (diceScore[0] != 1) {
+    var roundScore = document.querySelector("#current-" + activePlayer);
+    // Add dice values to the current player score
+    var currentSum = Number(roundScore.textContent) + diceScore[0] + diceScore[1];
+    roundScore.textContent = currentSum;
+  } else {
+    // If at least one of dice == 1
+    var roundScore = document.querySelector("#current-" + activePlayer);
+    roundScore.textContent = 0;
+    diceScore = [];
+    hideDice();
+    changeActivePlayer();
+  }
 }
 
 // Changes player's turn
@@ -86,20 +104,7 @@ function rollDice() {
   diceScore[0] = Math.floor(Math.random() * 6) + 1;
   diceScore[1] = Math.floor(Math.random() * 6) + 1;
   showDice();
-  // If both of dice != 1
-  if (diceScore[0] != 1) {
-    var roundScore = document.querySelector("#current-" + activePlayer);
-    // Add dice values to the current player score
-    var currentSum = Number(roundScore.textContent) + diceScore[0] + diceScore[1];
-    roundScore.textContent = currentSum;
-  } else {
-    // If at least one of dice == 1
-    var roundScore = document.querySelector("#current-" + activePlayer);
-    roundScore.textContent = 0;
-    diceScore = [];
-    hideDice();
-    changeActivePlayer();
-  }
+  controlScore();
 }
 
 // Holds current score to the global
@@ -122,15 +127,15 @@ function holdScore() {
 
 // Checks winner
 function checkWinner() {
-  if (totalScore1.textContent >= 100) {
-    gameWin();
-  } else if (totalScore2.textContent >= 100) {
-    gameWin();
+  if (totalScore1.textContent >= finalScore) {
+    win();
+  } else if (totalScore2.textContent >= finalScore) {
+    win();
   }
 }
 
 // Changes player's name when wins
-function gameWin() {
+function win() {
   var winner = document.querySelector("#name-" + activePlayer);
   winner.textContent = "Winner!";
   winner.style.color = "#e92a40";
@@ -139,8 +144,10 @@ function gameWin() {
 }
 
 // Buttons functionality
-document.querySelector("#newGame").addEventListener("click", startGame);
-document.querySelector("#rollDice").addEventListener("click", rollDice);
-document.querySelector("#hold").addEventListener("click", holdScore);
-
+newGameBtn.addEventListener("click", startGame);
+rollDiceBtn.addEventListener("click", rollDice);
+holdBtn.addEventListener("click", holdScore);
+userInput.addEventListener("change", function() {
+  finalScore = Number(this.value);
+});
 startGame();
