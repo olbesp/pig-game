@@ -9,6 +9,14 @@ GAME RULES:
 
 */
 var diceImgs = document.querySelectorAll(".dice");
+var imgSource = [
+  "img/dice-1.png",
+  "img/dice-2.png",
+  "img/dice-3.png",
+  "img/dice-4.png",
+  "img/dice-5.png",
+  "img/dice-6.png",
+];
 
 var diceScore = [];
 
@@ -44,12 +52,13 @@ function reset() {
   // Makes buttons enabled
   rollDiceBtn.disabled = false;
   holdBtn.disabled = false;
+  userInput.disabled = false;
 }
 
 // Controls if at least one of dice == 1
 function controlScore() {
   // If both of dice != 1
-  if (diceScore[0] != 1) {
+  if (diceScore.indexOf(1) === -1) {
     var roundScore = document.querySelector("#current-" + activePlayer);
     // Add dice values to the current player score
     var currentSum = Number(roundScore.textContent) + diceScore[0] + diceScore[1];
@@ -91,6 +100,13 @@ function hideDice() {
   }
 }
 
+// Sets dice images
+function setDice() {
+  for (var i = 0; i < diceImgs.length; i++) {
+    diceImgs[i].setAttribute("src", imgSource[diceScore[i] - 1]);
+  }
+}
+
 // Starts new game
 function startGame() {
   hideDice();
@@ -103,6 +119,7 @@ function rollDice() {
   // Save values of dice
   diceScore[0] = Math.floor(Math.random() * 6) + 1;
   diceScore[1] = Math.floor(Math.random() * 6) + 1;
+  setDice();
   showDice();
   controlScore();
 }
@@ -139,8 +156,9 @@ function win() {
   var winner = document.querySelector("#name-" + activePlayer);
   winner.textContent = "Winner!";
   winner.style.color = "#e92a40";
-  document.querySelector("#rollDice").disabled = true;
-  document.querySelector("#hold").disabled = true;
+  rollDiceBtn.disabled = true;
+  holdBtn.disabled = true;
+  userInput.disabled = true;
 }
 
 // Buttons functionality
