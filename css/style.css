@@ -33,7 +33,17 @@ html {
 }
 
 .active {
+  position: relative;
   background: #ededed;
+}
+
+.active .playerName::after {
+  content: "";
+  border: 5px solid #e92a40;
+  border-radius: 50%;
+  position: absolute;
+  top: 24px;
+  right: 10%;
 }
 
 .playerName {
@@ -123,6 +133,7 @@ html {
 @media only screen and (min-width: 480px) {
 
   .playerName { font-size: 130%; }
+  .active .playerName::after { top: 26px; right: 20%;}
   .sum { font-size: 280%; }
 
   .boxScore {
@@ -205,6 +216,7 @@ html {
             box-shadow: 2px 2px 20px #000, -2px -2px 20px #000;
   }
 
+  .active .playerName::after { top: 30px; }
   .boxScore { width: 150px; }
 
   .btn {
@@ -233,4 +245,6 @@ html {
   .playerPanel-2 {
     height: 100%;
   }
+
+  .active .playerName::after { top: 32px; right: 25%; }
 }
