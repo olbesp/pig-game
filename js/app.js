@@ -34,6 +34,11 @@ function startGame() {
   activePlayer = 1;
 }
 
+function changeActivePlayer() {
+  document.querySelector(".playerPanel-1").classList.toggle("active");
+  document.querySelector(".playerPanel-2").classList.toggle("active");
+}
+
 // Hold current score
 function holdScore() {
   if (activePlayer == 1) {
@@ -41,11 +46,13 @@ function holdScore() {
     scoreTotal1.textContent = sumOfRound;
     roundScore1.textContent = 0;
     activePlayer = 2;
+    changeActivePlayer();
   } else {
     var sumOfRound = Number(scoreTotal2.textContent) + Number(roundScore2.textContent);
     scoreTotal2.textContent = sumOfRound;
     roundScore2.textContent = 0;
     activePlayer = 1;
+    changeActivePlayer();
   }
 }
 
