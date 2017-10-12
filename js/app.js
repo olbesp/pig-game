@@ -10,7 +10,7 @@ GAME RULES:
 */
 var diceImgs = document.querySelectorAll(".dice");
 
-
+var diceScore = [];
 
 var scoreTotal1 = document.querySelector("#score-1");
 var scoreTotal2 = document.querySelector("#score-2");
@@ -19,9 +19,12 @@ var roundScore2 = document.querySelector("#current-2");
 
 var activePlayer = 1;
 
-var diceScore = Math.floor(Math.random() * 12) + 1;
+// Change player's turn
+function changeActivePlayer() {
+  document.querySelector(".playerPanel-1").classList.toggle("active");
+  document.querySelector(".playerPanel-2").classList.toggle("active");
+}
 
-document.querySelector("#current-" + activePlayer).textContent = diceScore;
 // Start new game
 function startGame() {
   for (var i = 0; i < diceImgs.length; i++) {
@@ -34,12 +37,27 @@ function startGame() {
   activePlayer = 1;
 }
 
-function changeActivePlayer() {
-  document.querySelector(".playerPanel-1").classList.toggle("active");
-  document.querySelector(".playerPanel-2").classList.toggle("active");
+// Execute score calculation relatively the dice values
+function rollDice() {
+  // Save values of dice
+  diceScore[0] = Math.floor(Math.random() * 6) + 1;
+  diceScore[1] = Math.floor(Math.random() * 6) + 1;
+  // If both of dice != 1
+  if (diceScore.indexOf(1) >= 0) {
+    var roundScore = document.querySelector("#current-" + activePlayer);
+    // Add dice values to the current player score
+    var currentSum = Number(roundScore.textContent) + diceScore[0] + diceScore[1];
+    roundScore.textContent = currentSum;
+  } else {
+    // If at least one of dice == 1
+    var roundScore = document.querySelector("#current-" + activePlayer);
+    roundScore.textContent = 0;
+    diceScore = [];
+    changeActivePlayer();
+  }
 }
 
-// Hold current score
+// Hold current score to the global
 function holdScore() {
   if (activePlayer == 1) {
     var sumOfRound = Number(scoreTotal1.textContent) + Number(roundScore1.textContent);
@@ -57,5 +75,8 @@ function holdScore() {
 }
 
 
+
+
 document.querySelector("#newGame").addEventListener("click", startGame);
+document.querySelector("#rollDice").addEventListener("click", rollDice);
 document.querySelector("#hold").addEventListener("click", holdScore);
