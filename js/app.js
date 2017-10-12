@@ -16,13 +16,21 @@ var scoreTotal1 = document.querySelector("#score-1");
 var scoreTotal2 = document.querySelector("#score-2");
 var roundScore1 = document.querySelector("#current-1");
 var roundScore2 = document.querySelector("#current-2");
-
-var activePlayer = 1;
+var player1 = document.querySelector(".playerPanel-1");
+var player2 = document.querySelector(".playerPanel-2");
+var activePlayer;
 
 // Change player's turn
 function changeActivePlayer() {
-  document.querySelector(".playerPanel-1").classList.toggle("active");
-  document.querySelector(".playerPanel-2").classList.toggle("active");
+  if (player1.classList.contains("active")) {
+    player1.classList.remove("active");
+    player2.classList.add("active");
+    activePlayer = 2;
+  } else {
+    player1.classList.add("active");
+    player2.classList.remove("active");
+    activePlayer = 1;
+  }
 }
 
 // Show dice images
@@ -47,7 +55,7 @@ function startGame() {
   scoreTotal2.textContent = 0;
   roundScore1.textContent = 0;
   roundScore2.textContent = 0;
-  activePlayer = 1;
+  changeActivePlayer();
 }
 
 // Execute score calculation relatively the dice values
@@ -79,13 +87,11 @@ function holdScore() {
     var sumOfRound = Number(scoreTotal1.textContent) + Number(roundScore1.textContent);
     scoreTotal1.textContent = sumOfRound;
     roundScore1.textContent = 0;
-    activePlayer = 2;
     changeActivePlayer();
   } else {
     var sumOfRound = Number(scoreTotal2.textContent) + Number(roundScore2.textContent);
     scoreTotal2.textContent = sumOfRound;
     roundScore2.textContent = 0;
-    activePlayer = 1;
     changeActivePlayer();
   }
 }
