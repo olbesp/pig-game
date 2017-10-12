@@ -5,7 +5,10 @@
   text-transform: uppercase;
 }
 
-html { font-size: 20px; }
+html {
+  font-family: 'Love Ya Like A Sister', cursive;
+  font-size: 20px;
+}
 
 .display {
   position: relative;
@@ -67,6 +70,7 @@ html { font-size: 20px; }
   z-index: 10;
   width: 100px;
   height: 30px;
+  font-family: 'Cabin Sketch', cursive;
   text-transform: uppercase;
   font-size: 50%;
   background: none;
