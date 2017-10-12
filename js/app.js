@@ -12,15 +12,16 @@ var diceImgs = document.querySelectorAll(".dice");
 
 var diceScore = [];
 
-var scoreTotal1 = document.querySelector("#score-1");
-var scoreTotal2 = document.querySelector("#score-2");
+var totalScore1 = document.querySelector("#score-1");
+var totalScore2 = document.querySelector("#score-2");
 var roundScore1 = document.querySelector("#current-1");
 var roundScore2 = document.querySelector("#current-2");
 var player1 = document.querySelector(".playerPanel-1");
 var player2 = document.querySelector(".playerPanel-2");
 var activePlayer;
+var finalScore = 100;
 
-// Change player's turn
+// Changes player's turn
 function changeActivePlayer() {
   if (player1.classList.contains("active")) {
     player1.classList.remove("active");
@@ -33,32 +34,35 @@ function changeActivePlayer() {
   }
 }
 
-// Show dice images
+// Shows dice images
 function showDice() {
   for (var i = 0; i < diceImgs.length; i++) {
     diceImgs[i].style.display = "block";
   }
 }
 
-// Hide dice images
+// Hides dice images
 function hideDice() {
   for (var i = 0; i < diceImgs.length; i++) {
     diceImgs[i].style.display = "none";
   }
 }
 
-
-// Start new game
+// Starts new game
 function startGame() {
   hideDice();
-  scoreTotal1.textContent = 0;
-  scoreTotal2.textContent = 0;
+  totalScore1.textContent = 0;
+  totalScore2.textContent = 0;
   roundScore1.textContent = 0;
   roundScore2.textContent = 0;
   changeActivePlayer();
+  document.querySelector("#name-1").textContent = "Player 1";
+  document.querySelector("#name-2").textContent = "Player 2";
+  document.querySelector("#rollDice").disabled = false;
+  document.querySelector("#hold").disabled = false;
 }
 
-// Execute score calculation relatively the dice values
+// Executes score calculation relatively the dice values
 function rollDice() {
   // Save values of dice
   diceScore[0] = Math.floor(Math.random() * 6) + 1;
@@ -80,20 +84,40 @@ function rollDice() {
   }
 }
 
-// Hold current score to the global
+// Holds current score to the global
 function holdScore() {
   hideDice();
   if (activePlayer == 1) {
-    var sumOfRound = Number(scoreTotal1.textContent) + Number(roundScore1.textContent);
-    scoreTotal1.textContent = sumOfRound;
+    var sumOfRound = Number(totalScore1.textContent) + Number(roundScore1.textContent);
+    totalScore1.textContent = sumOfRound;
     roundScore1.textContent = 0;
+    checkWinner();
     changeActivePlayer();
   } else {
-    var sumOfRound = Number(scoreTotal2.textContent) + Number(roundScore2.textContent);
-    scoreTotal2.textContent = sumOfRound;
+    var sumOfRound = Number(totalScore2.textContent) + Number(roundScore2.textContent);
+    totalScore2.textContent = sumOfRound;
     roundScore2.textContent = 0;
+    checkWinner();
     changeActivePlayer();
   }
+}
+
+// Checks winner
+function checkWinner() {
+  if (totalScore1.textContent >= 100) {
+    gameWin();
+  } else if (totalScore2.textContent >= 100) {
+    gameWin();
+  }
+}
+
+// Changes player's name when wins
+function gameWin() {
+  var winner = document.querySelector("#name-" + activePlayer);
+  winner.textContent = "Winner!";
+  winner.style.color = "#e92a40";
+  document.querySelector("#rollDice").disabled = true;
+  document.querySelector("#hold").disabled = true;
 }
 
 // Buttons functionality
