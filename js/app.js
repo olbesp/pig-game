@@ -25,11 +25,24 @@ function changeActivePlayer() {
   document.querySelector(".playerPanel-2").classList.toggle("active");
 }
 
-// Start new game
-function startGame() {
+// Show dice images
+function showDice() {
+  for (var i = 0; i < diceImgs.length; i++) {
+    diceImgs[i].style.display = "block";
+  }
+}
+
+// Hide dice images
+function hideDice() {
   for (var i = 0; i < diceImgs.length; i++) {
     diceImgs[i].style.display = "none";
   }
+}
+
+
+// Start new game
+function startGame() {
+  hideDice();
   scoreTotal1.textContent = 0;
   scoreTotal2.textContent = 0;
   roundScore1.textContent = 0;
@@ -42,8 +55,9 @@ function rollDice() {
   // Save values of dice
   diceScore[0] = Math.floor(Math.random() * 6) + 1;
   diceScore[1] = Math.floor(Math.random() * 6) + 1;
+  showDice();
   // If both of dice != 1
-  if (diceScore.indexOf(1) >= 0) {
+  if (diceScore[0] != 1) {
     var roundScore = document.querySelector("#current-" + activePlayer);
     // Add dice values to the current player score
     var currentSum = Number(roundScore.textContent) + diceScore[0] + diceScore[1];
@@ -53,12 +67,14 @@ function rollDice() {
     var roundScore = document.querySelector("#current-" + activePlayer);
     roundScore.textContent = 0;
     diceScore = [];
+    hideDice();
     changeActivePlayer();
   }
 }
 
 // Hold current score to the global
 function holdScore() {
+  hideDice();
   if (activePlayer == 1) {
     var sumOfRound = Number(scoreTotal1.textContent) + Number(roundScore1.textContent);
     scoreTotal1.textContent = sumOfRound;
@@ -74,9 +90,7 @@ function holdScore() {
   }
 }
 
-
-
-
+// Buttons functionality
 document.querySelector("#newGame").addEventListener("click", startGame);
 document.querySelector("#rollDice").addEventListener("click", rollDice);
 document.querySelector("#hold").addEventListener("click", holdScore);
