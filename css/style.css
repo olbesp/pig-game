@@ -40,9 +40,10 @@ html { font-size: 20px; }
 
 .boxScore {
   position: absolute;
-  left: 15%;
+  left: 50%;
   bottom: 2%;
-  width: 70%;
+  transform: translateX(-50%);
+  width: 80px;
   background: #006eb0;
 }
 
@@ -70,10 +71,11 @@ html { font-size: 20px; }
   background: none;
   border: 0;
   cursor: pointer;
-  transition: font-size .3s;
+  transition: all .3s;
 }
 
 .btn:hover { font-size: 60%; }
+.btn:active { background: #ddd; }
 .btn:focus { outline: none; }
 
 .btn i {
@@ -94,4 +96,34 @@ html { font-size: 20px; }
   width: 80px;
   filter: hue-rotate(210deg);
   box-shadow: 2px 2px 20px #909090, -2px -2px 20px #909090;
+}
+
+/*===================================================================*/
+/*480px+ wide devices*/
+/*===================================================================*/
+
+@media only screen and (min-width: 480px) {
+
+  .playerName { font-size: 130%; }
+  .sum { font-size: 280%; }
+
+  .boxScore {
+    width: 120px;
+    font-size: 150%;
+  }
+
+  .btn {
+    width: 130px;
+    font-size: 70%;
+  }
+
+  .btn:hover { font-size: 80%; }
+
+  #rollDice { top: 300px; }
+  #hold { top: 350px; }
+
+  #diceImg {
+    top: 180px;
+    width: 100px;
+  }
 }
