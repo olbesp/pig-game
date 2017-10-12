@@ -282,11 +282,11 @@ input:focus {
   .boxScore { bottom: 15%; }
   .dice { width: 90px; }
   #diceImg-2 {top: 200px;}
-  #rollDice { top: 300px; }
-  #hold { top: 335px; }
+  #rollDice { top: 330px; }
+  #hold { top: 375px; }
 
   input {
-    top: 375px;
+    top: 425px;
     width: 150px;
     font-size: 55%;
   }
