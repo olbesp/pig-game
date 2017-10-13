@@ -68,7 +68,6 @@ function controlScore() {
     var roundScore = document.querySelector("#current-" + activePlayer);
     roundScore.textContent = 0;
     diceScore = [];
-    hideDice();
     changeActivePlayer();
   }
 }
@@ -104,6 +103,9 @@ function hideDice() {
 function setDice() {
   for (var i = 0; i < diceImgs.length; i++) {
     diceImgs[i].setAttribute("src", imgSource[diceScore[i] - 1]);
+    diceScore[i] === 1 ?
+      diceImgs[i].style.cssText = "width: 110px; z-index: 200; transition: width 1s" :
+      diceImgs[i].style.cssText = "width: ''; z-index: ''";
   }
 }
 
