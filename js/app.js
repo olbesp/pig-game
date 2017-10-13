@@ -1,13 +1,4 @@
-/*
-GAME RULES:
-
-- The game has 2 players, playing in rounds
-- In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score
-- BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn
-- The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. After that, it's the next player's turn
-- The first player who reach 100 points on GLOBAL score wins the game
-
-*/
+// Select dice images
 var diceImgs = document.querySelectorAll(".dice");
 var imgSource = [
   "img/dice-1.png",
@@ -17,9 +8,7 @@ var imgSource = [
   "img/dice-5.png",
   "img/dice-6.png",
 ];
-
-var diceScore = [];
-
+// All changable areas on player panel
 var totalScore1 = document.querySelector("#score-1");
 var totalScore2 = document.querySelector("#score-2");
 var roundScore1 = document.querySelector("#current-1");
@@ -28,16 +17,20 @@ var player1 = document.querySelector(".playerPanel-1");
 var player2 = document.querySelector(".playerPanel-2");
 var name1 = document.querySelector("#name-1");
 var name2 = document.querySelector("#name-2");
-
+// Buttons and input
 var newGameBtn = document.querySelector("#newGame");
 var rollDiceBtn = document.querySelector("#rollDice");
 var holdBtn = document.querySelector("#hold");
 var userInput = document.querySelector("input");
-var activePlayer;
+// Defaul winning score
 var finalScore = 100;
 
-// Resets names to default (after winning)
+var diceScore = [];
+var activePlayer;
+
+
 function reset() {
+  // Resets names to default (after winning)
   // Resets names
   name1.textContent = "Player 1";
   name2.textContent = "Player 2";
@@ -55,8 +48,8 @@ function reset() {
   userInput.disabled = false;
 }
 
-// Controls if at least one of dice == 1
 function controlScore() {
+  // Controls if at least one of dice == 1
   // If both of dice != 1
   if (diceScore.indexOf(1) === -1) {
     var roundScore = document.querySelector("#current-" + activePlayer);
@@ -72,8 +65,8 @@ function controlScore() {
   }
 }
 
-// Changes player's turn
 function changeActivePlayer() {
+  // Changes player's turn
   if (player1.classList.contains("active")) {
     player1.classList.remove("active");
     player2.classList.add("active");
@@ -85,39 +78,40 @@ function changeActivePlayer() {
   }
 }
 
-// Shows dice images
 function showDice() {
+  // Shows dice images
   for (var i = 0; i < diceImgs.length; i++) {
     diceImgs[i].style.display = "block";
   }
 }
 
-// Hides dice images
 function hideDice() {
+  // Hides dice images
   for (var i = 0; i < diceImgs.length; i++) {
     diceImgs[i].style.display = "none";
   }
 }
 
-// Sets dice images
 function setDice() {
+  // Sets dice images
   for (var i = 0; i < diceImgs.length; i++) {
     diceImgs[i].setAttribute("src", imgSource[diceScore[i] - 1]);
+    // Increase the size of dice with 1 point
     diceScore[i] === 1 ?
       diceImgs[i].style.cssText = "width: 110px; z-index: 200; transition: width 1s" :
       diceImgs[i].style.cssText = "width: ''; z-index: ''";
   }
 }
 
-// Starts new game
 function startGame() {
+  // Starts new game
   hideDice();
   reset();
   changeActivePlayer();
 }
 
-// Executes score calculation relatively the dice values
 function rollDice() {
+  // Executes score calculation relatively the dice values
   // Save values of dice
   diceScore[0] = Math.floor(Math.random() * 6) + 1;
   diceScore[1] = Math.floor(Math.random() * 6) + 1;
@@ -126,8 +120,8 @@ function rollDice() {
   controlScore();
 }
 
-// Holds current score to the global
 function holdScore() {
+  // Holds current score to the global
   hideDice();
   if (activePlayer == 1) {
     var sumOfRound = Number(totalScore1.textContent) + Number(roundScore1.textContent);
@@ -144,8 +138,8 @@ function holdScore() {
   }
 }
 
-// Checks winner
 function checkWinner() {
+  // Checks winner
   if (totalScore1.textContent >= finalScore) {
     win();
   } else if (totalScore2.textContent >= finalScore) {
@@ -153,8 +147,8 @@ function checkWinner() {
   }
 }
 
-// Changes player's name when wins
 function win() {
+  // Changes player's name when wins and make buttons disabled
   var winner = document.querySelector("#name-" + activePlayer);
   winner.textContent = "Winner!";
   winner.style.color = "#e92a40";
@@ -170,4 +164,5 @@ holdBtn.addEventListener("click", holdScore);
 userInput.addEventListener("change", function() {
   finalScore = Number(this.value);
 });
+// Starts new game when the user opens the web page
 startGame();
