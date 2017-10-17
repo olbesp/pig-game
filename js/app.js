@@ -98,8 +98,8 @@ function setDice() {
     diceImgs[i].setAttribute("src", imgSource[diceScore[i] - 1]);
     // Increase the size of dice with 1 point
     diceScore[i] === 1 ?
-      diceImgs[i].style.cssText = "width: 110px; z-index: 200; transition: width 1s" :
-      diceImgs[i].style.cssText = "width: ''; z-index: ''";
+      diceImgs[i].style.cssText = "transform: translateX(-50%) scale(1.15); z-index: 200; transition: transform 1s" :
+      diceImgs[i].style.cssText = "transform: translateX(-50%) scale(1); z-index: ''";
   }
 }
 
